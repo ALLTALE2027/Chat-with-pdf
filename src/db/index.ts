@@ -1,5 +1,5 @@
 
-import { neon, neonConfig, NeonQueryFunction } from '@neondatabase/serverless';
+import { neon, neonConfig } from '@neondatabase/serverless';
 import { drizzle } from 'drizzle-orm/neon-http';
 import { config } from "dotenv";
 

@@ -5,7 +5,7 @@ import { db } from '@/db';
 import { chats } from "@/db/schema";
 import { auth } from "@clerk/nextjs/server";
 import { GetGcpUrl } from "@/lib/googleStorage";
-export async function POST(req: Request, res: Response) {
+export async function POST(req: Request) {
 
     const { userId } = await auth();
 
@@ -17,7 +17,7 @@ export async function POST(req: Request, res: Response) {
 
         const { file_key, file_name } = body;
         await loadGcpIntoPinecone(file_key);
-        let fileUrl: string = await GetGcpUrl(file_key)
+        const fileUrl: string = await GetGcpUrl(file_key)
         const chat_id = await db.insert(chats).values({
             fileKey: file_key,
             pdfName: file_name,

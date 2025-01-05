@@ -1,7 +1,5 @@
-import { GoogleGenerativeAI } from '@google/generative-ai';
-import { generateText, Message, streamText } from 'ai'
+import { streamText } from 'ai'
 import { createGoogleGenerativeAI } from "@ai-sdk/google"
-import { createStreamableValue } from 'ai/rsc';
 import { db } from '@/db';
 import { chats, messages as _messages } from '@/db/schema';
 import { eq } from 'drizzle-orm';

@@ -1,4 +1,4 @@
-import { Pinecone, PineconeRecord } from '@pinecone-database/pinecone';
+import { Pinecone } from '@pinecone-database/pinecone';
 import { convertToAscii } from './utils';
 import { getEmbeddings } from './embeddings';
 
@@ -41,7 +41,7 @@ export async function getContext(query: string, fileKey: string) {
             pageNumber: number,
         }
 
-        let docs = qualifyingDocs.map(match => (match.metadata as Metadata).text);
+        const docs = qualifyingDocs.map(match => (match.metadata as Metadata).text);
         return docs.join('\n').substring(0, 3000);   // 3000 is added to limit the number of characters we feed to ai , 
         // so that our token limit doesn't expire quickly
     } catch (error) {
