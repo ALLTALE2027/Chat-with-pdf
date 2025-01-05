@@ -1,5 +1,5 @@
 import { Pinecone, PineconeRecord } from '@pinecone-database/pinecone';
-import { downloadFileFromGCP } from './googleStorage';
+import { downloadFileFromGCP, downloadFileFromGcpForDeployed } from './googleStorage';
 import { PDFLoader } from "@langchain/community/document_loaders/fs/pdf";
 import { Document, RecursiveCharacterTextSplitter } from '@pinecone-database/doc-splitter'
 import md5 from 'md5'
@@ -22,7 +22,8 @@ export async function loadGcpIntoPinecone(fileKey: string) {
     try {
 
         //1. Obtain the pdf - download and read from pdf
-        const file_name = await downloadFileFromGCP(fileKey);
+        // const file_name = await downloadFileFromGCP(fileKey);   //use this for local run
+        const file_name = await downloadFileFromGcpForDeployed(fileKey);
 
         if (!file_name) {
             throw new Error("could not download from GCP");

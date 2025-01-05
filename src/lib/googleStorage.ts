@@ -64,3 +64,18 @@ export async function downloadFileFromGCP(file_key: string) {
         return null;
     }
 }
+export async function downloadFileFromGcpForDeployed(file_key: string) {
+    try {
+
+        const [contents] = await storage.bucket(bucketName).file(file_key).download();
+        // const tmpDir = './tmp';
+        const file_name = `/tmp/pdf-${Date.now()}.pdf`;
+
+        writeFileSync(file_name, contents as Buffer);
+
+        return file_name;
+    } catch (error) {
+        console.log("Error in downloadFileFromGCP", error);
+        return null;
+    }
+}

@@ -32,6 +32,10 @@ const ChatComponent = ({ chatId }: Props) => {
     onFinish: (result) => {
       console.log("Result fom usechat", result);
     },
+
+    onError: (error) => {
+      console.log("Error in chat component", error);
+    },
   });
 
   React.useEffect(() => {
