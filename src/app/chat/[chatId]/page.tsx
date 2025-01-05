@@ -14,7 +14,11 @@ type Props = {
   };
 };
 
-const ChatPage = async ({ params }: Props) => {
+const ChatPage = async ({
+  params,
+}: {
+  params: Promise<{ chatId: string }>;
+}) => {
   const { chatId } = await params;
   const { userId } = await auth();
 
