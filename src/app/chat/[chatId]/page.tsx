@@ -14,17 +14,19 @@ type Props = {
   };
 };
 
-const ChatPage = async ({ params: { chatId } }: Props) => {
+const ChatPage = async ({ params }: Props) => {
+  const { chatId } = await params;
   const { userId } = await auth();
 
   if (!userId) {
-    return redirect("sign-in");
+    return redirect("/sign-in");
   }
   const _chats = await db.select().from(chats).where(eq(chats.userId, userId));
 
-  if (!_chats) {
+  if (!_chats || _chats.length === 0) {
     return redirect("/");
   }
+
   if (!_chats.find((chat) => chat.id == parseInt(chatId))) {
     return redirect("/");
   }
