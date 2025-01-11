@@ -16,8 +16,8 @@ export async function POST(req: Request) {
         const body = await req.json();
 
         const { file_key, file_name } = body;
-        await loadGcpIntoPinecone(file_key);
         const fileUrl: string = await GetGcpUrl(file_key)
+        await loadGcpIntoPinecone(file_key, fileUrl);
         const chat_id = await db.insert(chats).values({
             fileKey: file_key,
             pdfName: file_name,

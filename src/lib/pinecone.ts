@@ -17,18 +17,22 @@ type PDFPage = {
     }
 }
 
-export async function loadGcpIntoPinecone(fileKey: string) {
+export async function loadGcpIntoPinecone(fileKey: string, fileURL: string) {
 
     try {
 
         //1. Obtain the pdf - download and read from pdf
         // const file_name = await downloadFileFromGCP(fileKey);   //use this for local run
-        const file_name = await downloadFileFromGcpForDeployed(fileKey);
+        // const file_name = await downloadFileFromGcpForDeployed(fileKey);
 
-        if (!file_name) {
-            throw new Error("could not download from GCP");
-        }
-        const loader = new PDFLoader(file_name);
+        // if (!file_name) {
+        //     throw new Error("could not download from GCP");
+        // }
+        const response = await fetch(fileURL);
+        const data = await response.blob();
+        console.log(data)
+
+        const loader = new PDFLoader(data);
         const pages = (await loader.load()) as PDFPage[];
 
         //2. split and segment the pdf into smaller documents
