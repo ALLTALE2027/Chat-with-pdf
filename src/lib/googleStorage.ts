@@ -70,7 +70,7 @@ export async function downloadFileFromGcpForDeployed(file_key: string) {
         const [contents] = await storage.bucket(bucketName).file(file_key).download();
         // const tmpDir = './tmp';
         const file_name = `/tmp/pdf-${Date.now()}.pdf`;
-
+        console.log("File downloaded locally", file_name);
         writeFileSync(file_name, contents as Buffer);
 
         return file_name;
