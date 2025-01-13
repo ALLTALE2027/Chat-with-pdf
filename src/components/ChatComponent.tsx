@@ -50,7 +50,10 @@ const ChatComponent = ({ chatId }: Props) => {
 
   // "/api/chat" message submit our message will be send to chat gpt to process
   return (
-    <div className="relative max-h-screen " id="message-container">
+    <div
+      className="relative max-h-screen overflow-y-auto"
+      id="message-container"
+    >
       {/* header */}
 
       <div className="sticky top-0 inset-x-0 p-2 bg-white h-fit">
